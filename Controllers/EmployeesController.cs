@@ -1,0 +1,122 @@
+﻿using CRUD_Operation.Data;
+using CRUD_Operation.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace CRUD_Operation.Controllers
+{
+    public class EmployeesController : Controller
+    {
+        public readonly EmployeeDBContext _DBValues;
+        public EmployeesController(EmployeeDBContext _DBSetValues)
+        {
+            _DBValues = _DBSetValues;
+        }
+        public async  Task<IActionResult> Employees()
+        {
+            var employees = await _DBValues.Employees.ToListAsync();
+            if (employees.Any())
+            {
+                var lastEmployeeId = employees[employees.Count - 1].Id;
+                ViewBag.LastEmployeeId = lastEmployeeId + 1;
+            }
+            else
+            {
+                ViewBag.LastEmployeeId = 1; // or any default value
+            }
+
+            return View();
+        }
+
+        public async Task<ActionResult> EmployeesList()
+        {
+            var employees = await _DBValues.Employees.ToListAsync();
+            return View(employees);
+        }
+
+
+
+       public async Task<ActionResult> AddEmployees(AddEmployeeModel AddModel)
+        {
+            var employee = new Employee()
+            {
+                FirstName = AddModel.FirstName,
+                LastName = AddModel.LastName,
+                Email = AddModel.Email,
+                PhoneNumber = AddModel.PhoneNumber,
+                Department = AddModel.Department,   
+                DepartmentID = AddModel.DepartmentID
+            };
+
+            await _DBValues.Employees.AddAsync(employee);
+            await _DBValues.SaveChangesAsync();
+            return RedirectToAction("EmployeesList");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditEmployees(int id)
+        {
+            var employee = await _DBValues.Employees.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (employee != null)
+            {
+                var viewModel = new UpdateEmployeeModel()
+                {
+                    Id = employee.Id,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    Email = employee.Email,
+                    PhoneNumber = employee.PhoneNumber,
+                    Department = employee.Department,
+                    DepartmentID = employee.DepartmentID,
+                };
+                return await Task.Run(() => View("UpdateEmployeeDetails", viewModel));
+            }
+            return RedirectToAction("EmployeesList");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateEditEmployees(UpdateEmployeeModel model)
+        {
+            var employee = await _DBValues.Employees.FindAsync(model.Id);
+
+            if (employee != null)
+            {
+
+                employee.FirstName = model.FirstName;
+                employee.LastName = model.LastName;
+                employee.Email = model.Email;
+                employee.PhoneNumber = model.PhoneNumber;
+                employee.Department = model.Department;
+                employee.DepartmentID = model.DepartmentID;
+
+                await _DBValues.SaveChangesAsync();
+                return RedirectToAction("EmployeesList");
+
+            }
+            return RedirectToAction("EmployeesList");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteEmployees(int id)
+        {
+            var employee = await _DBValues.Employees.FirstOrDefaultAsync(x => x.Id == id);
+            if (employee != null)
+            {
+                _DBValues.Employees.Remove(employee);
+                await _DBValues.SaveChangesAsync();
+            }
+
+            if (!await _DBValues.Employees.AnyAsync())
+            {
+                await TruncateEmployeesTableAsync();
+            }
+            return RedirectToAction("EmployeesList");
+        }
+        private async Task TruncateEmployeesTableAsync()
+        {
+            await _DBValues.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Employees");
+        }
+    }
+}

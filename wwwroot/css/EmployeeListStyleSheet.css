@@ -1,0 +1,40 @@
+﻿table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.btn {
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.editBtn{
+    color: green;
+    cursor:pointer;
+}
+
+.deleteBtn {
+    color: red;
+    cursor: pointer;
+}
+
+.actionClm {
+    justify-content: space-around;
+    display: flex;
+    border: none;
+}
+

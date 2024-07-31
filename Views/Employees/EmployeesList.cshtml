@@ -1,0 +1,50 @@
+﻿@model List<CRUD_Operation.Models.Employee>
+<link href="~/css/employeeliststylesheet.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+
+
+<h2>Employees Details</h2>
+
+<a class="btn edit-btn" style="float: right;" asp-controller="Employees" asp-action="Employees" title="Add New Employee Details">Add Employees</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Department</th>
+            <th>Department ID</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="7" style="text-align: center;">
+                    <p>No records found</p>
+                </td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.FirstName @item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Department</td>
+                    <td>@item.DepartmentID</td>
+                    <td class="actionClm">
+                        <a href="Employees/EditEmployees/@item.Id" title="Edit" class="editBtn fa-solid fa-pen-to-square"></a>
+                        <a href="Employees/DeleteEmployees/@item.Id" title="Delete" class="deleteBtn fa-solid fa-trash"></a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

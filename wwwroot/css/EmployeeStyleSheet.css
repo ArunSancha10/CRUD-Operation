@@ -1,0 +1,11 @@
+﻿.inputBox {
+    position: absolute;
+    left: 16rem;
+}
+
+.departmentDD {
+    position: absolute;
+    left: 16rem;
+    width: 11.8em;
+    height: 1.8em;
+}

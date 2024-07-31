@@ -1,0 +1,51 @@
+﻿@model CRUD_Operation.Models.AddEmployeeModel
+
+<link href="~/css/employeestylesheet.css" rel="stylesheet" />
+
+<div>
+
+
+    <div>
+        <h1>Add Employees Details</h1>
+        <form action="AddEmployees" method="post">
+
+            <div>
+
+                <label for="EmpId">Employee ID:</label>
+                <input class="inputBox" type="number" placeholder="ID Auto Generated" asp-for="Id" id="EmpId" name="EmpId" disabled> <br> <br>
+                
+                <label for="fname">First name:</label>
+                <input class="inputBox" type="text" id="fname" placeholder="First Name" asp-for="FirstName" name="FirstName" required> <br> <br>
+
+                <label for="lname">Last name:</label>
+                <input class="inputBox" type="text" id="lname" placeholder="Last Name" asp-for="LastName" name="LastName" required> <br> <br>
+
+                <label for="email">Email:</label>
+                <input class="inputBox" type="email" id="email" placeholder="Email" asp-for="Email" name="email" required> <br> <br>
+
+                <label for="PhNo">Phone Number:</label>
+                <input class="inputBox" type="text" id="PhNo" placeholder="Phone Number" asp-for="PhoneNumber" name="PhoneNumber" maxlength="10" pattern="\d{10}" required title="Please enter exactly 10 digits"> <br> <br>
+
+                <label for="Department">Department:</label>
+                <select class="departmentDD" id="Department" asp-for="Department" name="Department" required onchange="handleDepartmentChange()">
+                    <option value="" disabled selected>Select a Department</option>
+                    <option value="Development">Development</option>
+                    <option value="Support">Support</option>
+                    <option value="Admin">Admin</option>
+                    <option value="QA">QA</option>
+
+                </select> <br> <br>
+
+                <label for="DepartmentId">Department ID:</label>
+                <input class="inputBox" type="text" id="DepartmentId" name="DepartmentId" required disabled>
+                <input type="hidden" placeholder="Auto Generated" id="DepartmentIdHidden" asp-for="DepartmentID" name="DepartmentId">
+                <br><br>
+            </div>
+
+
+            <button class="btn" style="background: #024bf5; color:white" type="submit" title="Create">Create</button>
+            <a href="EmployeesList" title="Cancel" class="btn" style="background: #f50202; color:white">Cancel</a>
+            
+        </form>
+    </div>
+</div>
