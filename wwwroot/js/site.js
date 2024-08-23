@@ -3,53 +3,55 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-    $('#employeeTable').DataTable({
-        stateSave: true,
-        "bDestroy": true,
-        stateDuration: 60,
-        lengthMenu: [
-            [5, 10, 15, 20, 25, 50, -1],
-            [5, 10, 15, 20, 25, 50, 'All']
-        ],
-        language: {
-            searchPlaceholder: "Type here to search.."
-        },
-        columnDefs: [
-            {
-                targets: 0,
-                orderSequence: ['asc', 'desc']
 
+    if ($('#employeeTable tbody tr').length > 1) {
+        $('#employeeTable').DataTable({
+            stateSave: true,
+            "bDestroy": true,
+            stateDuration: 60,
+            lengthMenu: [
+                [5, 10, 15, 20, 25, 50, -1],
+                [5, 10, 15, 20, 25, 50, 'All']
+            ],
+            language: {
+                searchPlaceholder: "Type here to search.."
             },
-            {
-                targets: 1,
-                orderSequence: ['asc', 'desc']
-            },
-            {
-                targets: 2,
-                orderSequence: ['asc', 'desc']
-            },
-            {
-                targets: 3,
-                orderSequence: ['asc', 'desc']
-            },
-            {
-                targets: 4,
-                orderSequence: ['asc', 'desc']
-            },
-            {
-                targets: 5,
-                orderSequence: ['asc', 'desc']
-            },
-            {
-                targets: 6,
-                searchable: false,
-                orderable: false,
-            }
-        ],
-        order:[[0,'asc']]
+            columnDefs: [
+                {
+                    targets: 0,
+                    orderSequence: ['asc', 'desc']
 
-        // other DataTable options and configurations
-    });
+                },
+                {
+                    targets: 1,
+                    orderSequence: ['asc', 'desc']
+                },
+                {
+                    targets: 2,
+                    orderSequence: ['asc', 'desc']
+                },
+                {
+                    targets: 3,
+                    orderSequence: ['asc', 'desc']
+                },
+                {
+                    targets: 4,
+                    orderSequence: ['asc', 'desc']
+                },
+                {
+                    targets: 5,
+                    orderSequence: ['asc', 'desc']
+                },
+                {
+                    targets: 6,
+                    searchable: false,
+                    orderable: false,
+                }
+            ],
+            order: [[0, 'asc']]
+
+        });
+    }
 })
 document.addEventListener('DOMContentLoaded', function () {
     handleDepartmentChange();

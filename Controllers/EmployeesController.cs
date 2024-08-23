@@ -129,8 +129,6 @@ namespace CRUD_Operation.Controllers
                 _DBValues.Employees.Remove(employee);
                 await _DBValues.SaveChangesAsync();
 
-                // Update IDs of remaining employees
-                await ReindexEmployeeIdsAsync();
             }
 
             if (!await _DBValues.Employees.AnyAsync())
@@ -141,18 +139,6 @@ namespace CRUD_Operation.Controllers
         }
 
         // Method to reindex employee IDs
-        private async Task ReindexEmployeeIdsAsync()
-        {
-            var employees = await _DBValues.Employees.OrderBy(e => e.Id).ToListAsync();
-            int newId = 1;
-
-            foreach (var employee in employees)
-            {
-                employee.Id = newId++;
-            }
-
-            await _DBValues.SaveChangesAsync();
-        }
         private async Task TruncateEmployeesTableAsync()
         {
             await _DBValues.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Employees");
