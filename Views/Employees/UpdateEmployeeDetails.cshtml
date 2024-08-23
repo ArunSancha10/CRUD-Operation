@@ -74,3 +74,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('PhNo').addEventListener('input', function (event) {
+        // Remove non-numeric characters
+        this.value = this.value.replace(/\D/g, '');
+
+        // Check if the length is more than 10
+        if (this.value.length > 10) {
+            this.value = this.value.slice(0, 10);
+        }
+    });
+</script>
