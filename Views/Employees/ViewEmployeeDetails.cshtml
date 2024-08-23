@@ -2,25 +2,11 @@
 
 <link href="~/css/employeestylesheet.css" rel="stylesheet" />
 
-@if (TempData["EmailExists"] != null)
-{
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-            var alertMessage = '@TempData["EmailExists"]';
-            if (alertMessage) {
-                document.getElementById('alertMessage').textContent = alertMessage;
-                var alertModal = new bootstrap.Modal(document.getElementById('alertPopup'));
-                alertModal.show();
-            }
-        });
-    </script>
-}
-
 <div>
 
 
     <div>
-        <h1>Edit Employees Details</h1>
+        <h1>View Employees Details</h1>
         <form asp-action="UpdateEditEmployees" method="post">
 
             <div>
@@ -50,27 +36,10 @@
                 </select> <br> <br>
 
                 <label for="DepartmentId">Department ID:</label>
-                <input class="inputBox" type="text" id="DepartmentId" name="DepartmentId" required disabled>
-                <input type="hidden" placeholder="Auto Generated" id="DepartmentIdHidden" asp-for="DepartmentID" name="DepartmentId">
+                <input class="inputBox" type="text" id="DepartmentId" name="DepartmentId" required readonly>
+                <input type="hidden" id="DepartmentIdHidden" asp-for="DepartmentID" name="DepartmentId">
                 <br><br>
             </div>
-
-            <button class="btn" style="background: #024bf5; color:white" type="submit" title="Update">Update</button>
-            <a href="/" title="Cancel" class="btn" style="background: #f50202; color:white">Cancel</a>
         </form>
-    </div>
-</div>
-
-<div class="modal fade popupModalTop" id="alertPopup" tabindex="-1" aria-labelledby="alertPopupLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="alertPopupLabel">Alert</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="alertMessage"></p>
-            </div>
-        </div>
     </div>
 </div>

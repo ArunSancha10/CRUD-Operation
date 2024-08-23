@@ -5,9 +5,9 @@
 
 <h2>Employees Details</h2>
 
-<a class="btn edit-btn" style="float: right;" asp-controller="Employees" asp-action="Employees" title="Add New Employee Details">Add Employees</a>
+<a class="btn edit-btn" style="float: right;" asp-controller="Employees" asp-action="Employees" title="Add New Employee Details"><i class="fas fa-plus"></i> Add</a>
 
-<table>
+<table id="employeeTable" class="display" style="width:100%">
     <thead>
         <tr>
             <th>ID</th>
@@ -40,11 +40,48 @@
                     <td>@item.Department</td>
                     <td>@item.DepartmentID</td>
                     <td class="actionClm">
+                        <a onclick="viewPopup('@item.Id', '@item.FirstName', '@item.LastName','@item.Email','@item.PhoneNumber','@item.Department','@item.DepartmentID',)" title="View" class="viewBtn fa-solid fa-eye"></a>
                         <a href="Employees/EditEmployees/@item.Id" title="Edit" class="editBtn fa-solid fa-pen-to-square"></a>
-                        <a href="Employees/DeleteEmployees/@item.Id" title="Delete" class="deleteBtn fa-solid fa-trash"></a>
+                        <a onclick="deletePopup('@item.Id', '@item.FirstName', '@item.LastName')" title="Delete" class="deleteBtn fa-solid fa-trash"></a>
                     </td>
                 </tr>
             }
         }
     </tbody>
 </table>
+
+<div class="modal fade popupModalTop" id="deletePopup" tabindex="-1" aria-labelledby="deletePopupLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePopupLabel">Are you sure?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteMessage">Do you really want to delete this record?</p>
+            </div>
+            <div class="modal-footer">
+                <a id="deleteButton" href="#" class="btn btn-primary">Delete</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade popupModalTop" id="viewPopupModal" tabindex="-1" aria-labelledby="viewPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewPopupModalLabel">Special title treatment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="viewName"></p>
+                <p id="viewEmail"></p>
+                <p id="viewPhoneNumber"></p>
+                <p id="viewDepartment"></p>
+                <p id="viewDepartmentID"></p>
+            </div>
+        </div>
+    </div>
+</div>
