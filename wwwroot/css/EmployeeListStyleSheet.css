@@ -22,19 +22,60 @@ th, td {
     color: white;
 }
 
-.editBtn{
-    color: green;
-    cursor:pointer;
+.editBtn {
+    color: gray; /* Default color for the button */
+    cursor: pointer; /* Pointer cursor on hover */
 }
 
-.deleteBtn {
-    color: red;
+.editBtn:hover {
+     color: green; /* Color on hover */
+}
+
+.viewBtn {
+    text-decoration: none;
+    color: gray;
     cursor: pointer;
 }
+
+    .viewBtn:hover {
+        color: blue; /* Color on hover */
+    }
+
+.deleteBtn {
+    color: gray;
+    cursor: pointer;
+}
+
+    .deleteBtn:hover {
+        color: red; /* Color on hover */
+    }
 
 .actionClm {
     justify-content: space-around;
     display: flex;
     border: none;
+}
+
+.deletePopupStyle {
+    width: 25rem;
+    left: 40%;
+    top: 40%;
+}
+
+/* Delete button specific styling */
+#deleteButton {
+    background-color: #dc3545; /* Red background for delete */
+    border: 1px solid #dc3545;
+    color: white;
+}
+
+    /* Hover effect for delete button */
+    #deleteButton:hover {
+        background-color: #c82333; /* Darker red on hover */
+        border-color: #bd2130;
+    }
+
+.popupModalTop{
+    top: 10rem;
 }
 
